@@ -1,0 +1,8 @@
+default_platform(:ios)
+
+platform :ios do
+  desc "Runs unit tests and UI tests"
+  lane :tests do
+    run_tests(scheme: "ios-simple-objc")
+  end
+end

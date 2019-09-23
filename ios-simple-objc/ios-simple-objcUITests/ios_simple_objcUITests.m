@@ -36,8 +36,6 @@
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
     XCUIElement *bitriseIosSimpleObjcElement = [[[XCUIApplication alloc] init].otherElements containingType:XCUIElementTypeStaticText identifier:@"Bitrise ios-simple-objc"].element;
-    [bitriseIosSimpleObjcElement swipeRight];
-    [bitriseIosSimpleObjcElement swipeLeft];
     
     [XCTContext runActivityNamed:(@"screenshot") block:^(id<XCTActivity>  _Nonnull activity) {
         XCUIScreenshot *screenShot = [[XCUIScreen mainScreen] screenshot];

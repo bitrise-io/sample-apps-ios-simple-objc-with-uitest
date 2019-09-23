@@ -35,7 +35,7 @@
 - (void)testExample {
     // Use recording to get started writing UI tests.
     // Use XCTAssert and related functions to verify your tests produce the correct results.
-    XCUIElement *bitriseIosSimpleObjcElement = [[[XCUIApplication alloc] init].otherElements containingType:XCUIElementTypeStaticText identifier:@"Bitrise ios-simple-objc"].element;
+    XCUIElement *bitriseIosSimpleObjcElement = [[[XCUIApplication alloc] init].otherElements containingType:XCUIElementTypeStaticText identifier:@"Bitrise ios-simple-objc"].firstMatch;
     [bitriseIosSimpleObjcElement swipeRight];
     [bitriseIosSimpleObjcElement swipeLeft];
     

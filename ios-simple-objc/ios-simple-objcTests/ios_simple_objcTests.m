@@ -32,8 +32,9 @@
 
 - (void)testPerformanceExample {
     // This is an example of a performance test case.
-    [self measureBlock:^{
+    [self measureWithMetrics:@[[XCTApplicationLaunchMetric init]] block:^{
         // Put the code you want to measure the time of here.
+        [[XCUIApplication init] launch];
     }];
 }
 

@@ -484,8 +484,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tooling Bot Bitrise (H3RAQJ3F2B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tooling Bot Bitrise (H3RAQJ3F2B)";
+				CODE_SIGN_IDENTITY = "Apple Development: Tooling Bot Bitrise (H3RAQJ3F2B)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 72SA8V3WYL;
@@ -505,8 +504,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer: Tooling Bot Bitrise (H3RAQJ3F2B)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Tooling Bot Bitrise (H3RAQJ3F2B)";
+				CODE_SIGN_IDENTITY = "Apple Development: Tooling Bot Bitrise (H3RAQJ3F2B)";
 				CODE_SIGN_STYLE = Manual;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				DEVELOPMENT_TEAM = 72SA8V3WYL;

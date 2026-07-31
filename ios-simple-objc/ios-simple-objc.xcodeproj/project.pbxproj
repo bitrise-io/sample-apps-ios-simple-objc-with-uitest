@@ -218,7 +218,7 @@
 		BA3CBE6D19F7A93800CED4D5 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				BuildIndependentTargetsInParallel = NO;
+				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 2660;
 				ORGANIZATIONNAME = Bitrise;
 				TargetAttributes = {

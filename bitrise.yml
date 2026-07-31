@@ -68,6 +68,18 @@ step_bundles:
                        "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"; do
               echo "== $dir"
               ls -la "$dir" 2>&1 || echo "(missing)"
+              for profile in "$dir"/*.mobileprovision; do
+                [ -f "$profile" ] || continue
+                echo "-- $(basename "$profile")"
+                security cms -D -i "$profile" 2>/dev/null > /tmp/profile.plist || continue
+                for key in Name UUID CreationDate; do
+                  printf '   %s: ' "$key"
+                  plutil -extract "$key" raw -o - /tmp/profile.plist 2>&1
+                done
+                printf '   AppID: '
+                plutil -extract Entitlements.application-identifier raw -o - /tmp/profile.plist 2>&1
+                echo
+              done
             done
             exit 0
     - virtual-device-testing-for-ios:

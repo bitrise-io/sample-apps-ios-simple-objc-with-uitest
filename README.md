@@ -29,3 +29,13 @@ This sample is deliberately shaped to exercise specific step behaviors:
 - **Wide Xcode compatibility.** The 15.6 deployment target is low enough to build on older CI
   Xcode versions and still valid on the newest, so the same fixture compiles across the whole CI
   Xcode matrix.
+
+## CI
+
+`bitrise.yml` defines a `pr_check` pipeline that runs on every pull request. It fans out into
+four parallel workflows: tests and archive, each on two stacks. One stack is the lowest Xcode
+version this fixture supports, the other tracks the latest stable Xcode. That pair is what keeps
+the wide Xcode compatibility above honest.
+
+The steps live in two step bundles, `run_tests` and `build_archive`, so each workflow is a stack
+plus one bundle reference and a step change only has to be made once.

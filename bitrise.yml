@@ -56,6 +56,19 @@ step_bundles:
     - xcode-build-for-test:
         inputs:
         - automatic_code_signing: api-key
+        - verbose_log: "true"
+    - script:
+        title: Debug - list provisioning profile directories
+        is_always_run: true
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            echo "Xcode: $(xcodebuild -version | head -1)"
+            for dir in "$HOME/Library/MobileDevice/Provisioning Profiles" \
+                       "$HOME/Library/Developer/Xcode/UserData/Provisioning Profiles"; do
+              echo "== $dir"
+              ls -la "$dir" 2>&1
+            done
     - virtual-device-testing-for-ios:
         inputs:
         - test_devices: |-

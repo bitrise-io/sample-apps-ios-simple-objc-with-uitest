@@ -7,6 +7,7 @@ app:
   - BITRISE_PROJECT_PATH: ios-simple-objc/ios-simple-objc.xcodeproj
   - BITRISE_SCHEME: ios-simple-objc
   - BITRISE_EXPORT_METHOD: development
+  status_report_name: bitrise/<project_title>/<target_id>
 
 pipelines:
   pr_check:
@@ -42,8 +43,8 @@ workflows:
     - virtual-device-testing-for-ios:
         inputs:
         - test_devices: |-
-            iphone7,11.2,en,portrait
-            iphone8,11.2,en,landscape
+            iphone8,16.6,en,portrait
+            iphonese3,26.3,en,landscape
         - download_test_results: "true"
     - xcode-test:
         inputs:

@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		136E96AF1F28D13B00D4510C /* ios_simple_objcUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = 136E96AE1F28D13B00D4510C /* ios_simple_objcUITests.m */; };
+		169D6732301CC58500ABBDA2 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 169D6731301CC58500ABBDA2 /* SceneDelegate.m */; };
 		BA3CBE7B19F7A93800CED4D5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3CBE7A19F7A93800CED4D5 /* main.m */; };
 		BA3CBE7E19F7A93900CED4D5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = BA3CBE7D19F7A93900CED4D5 /* AppDelegate.m */; };
 		BA3CBE8119F7A93900CED4D5 /* ios_simple_objc.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = BA3CBE7F19F7A93900CED4D5 /* ios_simple_objc.xcdatamodeld */; };
@@ -39,6 +40,8 @@
 		136E96AC1F28D13B00D4510C /* ios-simple-objcUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-simple-objcUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		136E96AE1F28D13B00D4510C /* ios_simple_objcUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ios_simple_objcUITests.m; sourceTree = "<group>"; };
 		136E96B01F28D13B00D4510C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		169D6730301CC58300ABBDA2 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		169D6731301CC58500ABBDA2 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
 		BA3CBE7519F7A93800CED4D5 /* ios-simple-objc.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "ios-simple-objc.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA3CBE7919F7A93800CED4D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BA3CBE7A19F7A93800CED4D5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -121,6 +124,8 @@
 				BA3CBE8A19F7A93900CED4D5 /* LaunchScreen.xib */,
 				BA3CBE7F19F7A93900CED4D5 /* ios_simple_objc.xcdatamodeld */,
 				BA3CBE7819F7A93800CED4D5 /* Supporting Files */,
+				169D6730301CC58300ABBDA2 /* SceneDelegate.h */,
+				169D6731301CC58500ABBDA2 /* SceneDelegate.m */,
 			);
 			path = "ios-simple-objc";
 			sourceTree = "<group>";
@@ -298,6 +303,7 @@
 			files = (
 				BA3CBE7E19F7A93900CED4D5 /* AppDelegate.m in Sources */,
 				BA3CBE7B19F7A93800CED4D5 /* main.m in Sources */,
+				169D6732301CC58500ABBDA2 /* SceneDelegate.m in Sources */,
 				BA3CBE8419F7A93900CED4D5 /* ViewController.m in Sources */,
 				BA3CBE8119F7A93900CED4D5 /* ios_simple_objc.xcdatamodeld in Sources */,
 			);

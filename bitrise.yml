@@ -15,26 +15,42 @@ pipelines:
       pull_request:
       - target_branch: '*'
     workflows:
-      test: {}
-      archive: {}
+      test_min_xcode: {}
+      test_latest_xcode: {}
+      archive_min_xcode: {}
+      archive_latest_xcode: {}
 
 workflows:
-  archive:
+  test_min_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-16.0.x
     steps:
-    - git-clone: {}
-    - xcode-test:
-        inputs:
-        - project_path: $BITRISE_PROJECT_PATH
-        - scheme: $BITRISE_SCHEME
-    - xcode-archive:
-        inputs:
-        - project_path: $BITRISE_PROJECT_PATH
-        - scheme: $BITRISE_SCHEME
-        - export_method: $BITRISE_EXPORT_METHOD
-        - automatic_code_signing: api-key
-    - deploy-to-bitrise-io: {}
+    - bundle::run_tests: {}
 
-  test:
+  test_latest_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-latest-stable
+    steps:
+    - bundle::run_tests: {}
+
+  archive_min_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-16.0.x
+    steps:
+    - bundle::build_archive: {}
+
+  archive_latest_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-latest-stable
+    steps:
+    - bundle::build_archive: {}
+
+step_bundles:
+  run_tests:
     steps:
     - git-clone: {}
     - xcode-build-for-test:
@@ -50,6 +66,17 @@ workflows:
         inputs:
         - project_path: $BITRISE_PROJECT_PATH
         - scheme: $BITRISE_SCHEME
+    - deploy-to-bitrise-io: {}
+
+  build_archive:
+    steps:
+    - git-clone: {}
+    - xcode-archive:
+        inputs:
+        - project_path: $BITRISE_PROJECT_PATH
+        - scheme: $BITRISE_SCHEME
+        - export_method: $BITRISE_EXPORT_METHOD
+        - automatic_code_signing: api-key
     - deploy-to-bitrise-io: {}
 
 meta:

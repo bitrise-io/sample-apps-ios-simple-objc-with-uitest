@@ -371,6 +371,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.bitrise.ios-simple-objcUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				TEST_TARGET_NAME = "ios-simple-objc";
 			};
 			name = Debug;
@@ -395,6 +396,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "io.bitrise.ios-simple-objcUITests";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				TEST_TARGET_NAME = "ios-simple-objc";
 			};
 			name = Release;
@@ -576,6 +578,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Bitrise.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ios-simple-objc.app/ios-simple-objc";
 			};
 			name = Debug;
@@ -600,6 +603,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "Bitrise.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				SUPPORTS_MACCATALYST = NO;
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/ios-simple-objc.app/ios-simple-objc";
 			};
 			name = Release;

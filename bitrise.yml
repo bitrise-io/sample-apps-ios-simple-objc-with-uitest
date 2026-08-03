@@ -53,6 +53,9 @@ step_bundles:
   run_tests:
     steps:
     - git-clone: {}
+    # Builds for a physical device, which is what exercises automatic code
+    # signing of the test targets. xcode-test alone would only sign for a
+    # simulator, where signing is not enforced.
     - xcode-build-for-test:
         inputs:
         - automatic_code_signing: api-key
@@ -60,8 +63,7 @@ step_bundles:
         inputs:
         - project_path: $BITRISE_PROJECT_PATH
         - scheme: $BITRISE_SCHEME
-    - deploy-to-bitrise-io:
-        is_always_run: true
+    - deploy-to-bitrise-io: {}
 
   build_archive:
     steps:

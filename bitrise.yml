@@ -33,7 +33,9 @@ workflows:
       bitrise.io:
         stack: osx-xcode-latest-stable
     steps:
-    - bundle::run_tests: {}
+    - bundle::run_tests:
+        inputs:
+        - build_step_codesigning: "off"
 
   archive_min_xcode:
     meta:
@@ -51,11 +53,24 @@ workflows:
 
 step_bundles:
   run_tests:
+    inputs:
+    - build_step_codesigning: api-key
+      opts:
+        title: Code signing mode for the build step
+        description: |-
+          Set to `off` to have manage-ios-code-signing prepare the assets instead.
+          The build step and the standalone step must never both manage signing.
     steps:
     - git-clone: {}
+    - manage-ios-code-signing:
+        run_if: '{{enveq "build_step_codesigning" "off"}}'
+        inputs:
+        - distribution_method: $BITRISE_EXPORT_METHOD
+        - configuration: Debug
+        - sign_uitest_targets: "yes"
     - xcode-build-for-test:
         inputs:
-        - automatic_code_signing: api-key
+        - automatic_code_signing: $build_step_codesigning
     - virtual-device-testing-for-ios:
         inputs:
         - test_devices: |-

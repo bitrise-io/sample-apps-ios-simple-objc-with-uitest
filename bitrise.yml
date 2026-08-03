@@ -20,6 +20,7 @@ pipelines:
       test_edge_xcode: {}
       archive_min_xcode: {}
       archive_latest_xcode: {}
+      archive_edge_xcode: {}
 
 workflows:
   test_min_xcode:
@@ -54,6 +55,13 @@ workflows:
     meta:
       bitrise.io:
         stack: osx-xcode-latest-stable
+    steps:
+    - bundle::build_archive: {}
+
+  archive_edge_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-edge
     steps:
     - bundle::build_archive: {}
 

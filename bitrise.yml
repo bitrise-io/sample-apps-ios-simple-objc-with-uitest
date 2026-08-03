@@ -62,11 +62,28 @@ step_bundles:
             iphone8,16.6,en,portrait
             iphonese3,26.3,en,landscape
         - download_test_results: "true"
+        - num_flaky_test_attempts: "2"
+    - script:
+        title: Collect the device test assets
+        is_always_run: true
+        inputs:
+        - content: |-
+            #!/usr/bin/env bash
+            set -euo pipefail
+            assets="${VDTESTING_DOWNLOADED_FILES_DIR:-}"
+            if [ -z "$assets" ] || [ ! -d "$assets" ]; then
+              echo "No device test assets were downloaded."
+              exit 0
+            fi
+            # The step downloads into a temp dir, which deploy-to-bitrise-io does not look at.
+            (cd "$assets" && zip -qr "$BITRISE_DEPLOY_DIR/device-test-results.zip" .)
+            echo "Collected device test assets into device-test-results.zip"
     - xcode-test:
         inputs:
         - project_path: $BITRISE_PROJECT_PATH
         - scheme: $BITRISE_SCHEME
-    - deploy-to-bitrise-io: {}
+    - deploy-to-bitrise-io:
+        is_always_run: true
 
   build_archive:
     steps:

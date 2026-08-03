@@ -1,69 +1,97 @@
----
-format_version: 1.0.0
+format_version: "26"
 default_step_lib_source: https://github.com/bitrise-io/bitrise-steplib.git
+project_type: ios
 
 app:
   envs:
-  - BITRISE_PROJECT_PATH: "./ios-simple-objc/ios-simple-objc.xcodeproj"
-    opts:
-      is_expand: false
+  - BITRISE_PROJECT_PATH: ios-simple-objc/ios-simple-objc.xcodeproj
   - BITRISE_SCHEME: ios-simple-objc
-    opts:
-      is_expand: false
+  - BITRISE_EXPORT_METHOD: development
+  status_report_name: bitrise/<project_title>/<target_id>
 
-trigger_map:
-- pattern: "*"
-  is_pull_request_allowed: true
-  workflow: primary
+pipelines:
+  pr_check:
+    triggers:
+      pull_request:
+      - target_branch: '*'
+    workflows:
+      test_min_xcode: {}
+      test_latest_xcode: {}
+      test_edge_xcode: {}
+      archive_min_xcode: {}
+      archive_latest_xcode: {}
+      archive_edge_xcode: {}
 
 workflows:
-  primary:
+  test_min_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-16.0.x
     steps:
-    - git-clone@3.0.0:
-        run_if: ".IsCI"
-        outputs:
-        - GIT_CLONE_COMMIT_HASH:
-          opts:
-            title: Cloned git commit's commit hash
-        - GIT_CLONE_COMMIT_MESSAGE_SUBJECT:
-          opts:
-            title: Cloned git commit's message subject
-        - GIT_CLONE_COMMIT_MESSAGE_BODY:
-          opts:
-            title: Cloned git commit's message body
-        - GIT_CLONE_COMMIT_AUTHOR_NAME:
-          opts:
-            title: Cloned git commit's author name
-        - GIT_CLONE_COMMIT_AUTHOR_EMAIL:
-          opts:
-            title: Cloned git commit's author email address
-        - GIT_CLONE_COMMIT_COMMITER_NAME:
-          opts:
-            title: Cloned git commit's committer name
-        - GIT_CLONE_COMMIT_COMMITER_EMAIL:
-          opts:
-            title: Cloned git commit's committer email
-    - cocoapods-install@1.0.2: {}
-    - certificate-and-profile-installer@1.2.0:
-        run_if: ".IsCI"
-    - select-xcode-version@2.0.0:
-        run_if: ".IsCI"
+    - bundle::run_tests: {}
+
+  test_latest_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-latest-stable
+    steps:
+    - bundle::run_tests: {}
+
+  test_edge_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-edge
+    steps:
+    - bundle::run_tests: {}
+
+  archive_min_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-16.0.x
+    steps:
+    - bundle::build_archive: {}
+
+  archive_latest_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-latest-stable
+    steps:
+    - bundle::build_archive: {}
+
+  archive_edge_xcode:
+    meta:
+      bitrise.io:
+        stack: osx-xcode-edge
+    steps:
+    - bundle::build_archive: {}
+
+step_bundles:
+  run_tests:
+    steps:
+    - git-clone: {}
+    # Builds for a physical device, which is what exercises automatic code
+    # signing of the test targets.
+    - xcode-build-for-test:
         inputs:
-        - version_channel_id: "-stable"
-    - xcode-test@1.3.0:
-        title: 'Xcode: Unit Test'
+        - automatic_code_signing: api-key
+    - xcode-test:
         inputs:
-        - opts:
-            is_expand: false
-          simulator_device: iPad
-    - xcode-archive@1.2.0:
-        title: 'Xcode: Create Archive'
+        - project_path: $BITRISE_PROJECT_PATH
+        - scheme: $BITRISE_SCHEME
+    - deploy-to-bitrise-io: {}
+
+  build_archive:
+    steps:
+    - git-clone: {}
+    - xcode-archive:
         inputs:
-        - output_dir: "${BITRISE_DEPLOY_DIR}"
-        outputs:
-        - BITRISE_IPA_PATH:
-          opts:
-            title: The created .ipa file's path
-        - BITRISE_DSYM_PATH:
-          opts:
-            title: The created .dSYM.zip file's path
+        - project_path: $BITRISE_PROJECT_PATH
+        - scheme: $BITRISE_SCHEME
+        - export_method: $BITRISE_EXPORT_METHOD
+        - automatic_code_signing: api-key
+    - deploy-to-bitrise-io: {}
+
+meta:
+  bitrise.io:
+    machine_type_id: g2.mac.medium
+    stack: osx-xcode-16.0.x

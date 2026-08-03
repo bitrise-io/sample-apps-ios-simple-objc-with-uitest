@@ -54,8 +54,7 @@ step_bundles:
     steps:
     - git-clone: {}
     # Builds for a physical device, which is what exercises automatic code
-    # signing of the test targets. xcode-test alone would only sign for a
-    # simulator, where signing is not enforced.
+    # signing of the test targets.
     - xcode-build-for-test:
         inputs:
         - automatic_code_signing: api-key
